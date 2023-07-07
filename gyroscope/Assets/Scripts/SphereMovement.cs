@@ -7,6 +7,10 @@ public class SphereMovement : MonoBehaviour
     public bool biased;
     public float rotationSpeed = 1;
 
+    public Vector3 weightAxis = Vector3.one;
+
+    private Vector3 rotationValue;
+
     void Start()
     {
         GyroInput.IsActive = true;
@@ -14,14 +18,12 @@ public class SphereMovement : MonoBehaviour
 
     void Update()
     {
-        if (biased)
-        {
-            transform.Rotate(0, Time.deltaTime * rotationSpeed * (-Input.gyro.rotationRateUnbiased.y), 0);
-        }
-        else
-        {
-            transform.Rotate(0, Time.deltaTime * rotationSpeed * (-Input.gyro.rotationRateUnbiased.y), 0);
-        }
+        rotationValue = biased ? Input.gyro.rotationRate : Input.gyro.rotationRateUnbiased;
 
+        rotationValue.x *= weightAxis.x;
+        rotationValue.y *= weightAxis.y;
+        rotationValue.z *= weightAxis.z;
+
+        transform.Rotate((Time.deltaTime * rotationSpeed) * rotationValue);
     }
 }
