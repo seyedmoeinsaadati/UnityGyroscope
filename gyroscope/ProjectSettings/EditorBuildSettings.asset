@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/TripleAxis.unity
+    guid: f0b7427b76cbd8c48a952f517cc43903
   m_configObjects: {}
